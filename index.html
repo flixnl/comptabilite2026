@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <title>Comptabilité 2026</title>
+  <style>
+    :root {
+      --bg:      #0f172a;
+      --card:    #1e293b;
+      --border:  #334155;
+      --text:    #f1f5f9;
+      --muted:   #94a3b8;
+      --accent:  #6366f1;
+      --green:   #34d399;
+      --red:     #f87171;
+      --orange:  #fb923c;
+      --yellow:  #fbbf24;
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      font-family: -apple-system, 'SF Pro Text', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      padding-bottom: env(safe-area-inset-bottom, 24px);
+    }
+    .header {
+      background: linear-gradient(135deg, #1e1b4b 0%, #1e293b 100%);
+      padding: 52px 20px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+    .header .sub {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .header .update {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dot { width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block; }
+    .content { padding: 16px; max-width: 600px; margin: 0 auto; }
+    .section-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin: 24px 0 10px;
+    }
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    /* KPI row */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .kpi-row.three { grid-template-columns: 1fr 1fr 1fr; }
+    .kpi {
+      background: var(--card);
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      padding: 16px 14px;
+    }
+    .kpi .label { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+    .kpi .value { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+    .kpi .value.sm { font-size: 16px; }
+    /* Table */
+    table { width: 100%; border-collapse: collapse; }
+    th {
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.5px; color: var(--muted);
+      padding: 10px 12px 8px; text-align: right; border-bottom: 1px solid var(--border);
+    }
+    th:first-child { text-align: left; }
+    td { padding: 10px 12px; border-bottom: 1px solid #1e293b; font-size: 13px; }
+    td:first-child { color: var(--text); font-weight: 500; }
+    .num { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
+    .sal { color: #a5b4fc; }
+    .dep { color: var(--orange); }
+    .mois-cell {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    tr:last-child td { border-bottom: none; }
+    .total-row td {
+      font-weight: 700;
+      border-top: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+    }
+    /* Solde fiscal card */
+    .solde-card {
+      background: linear-gradient(135deg, #1e1b4b 0%, #1e293b 100%);
+      border-radius: 16px;
+      border: 1px solid #3730a3;
+      padding: 20px;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .solde-card .label { font-size: 12px; color: #a5b4fc; margin-bottom: 8px; }
+    .solde-card .amount { font-size: 36px; font-weight: 800; letter-spacing: -1px; }
+    .solde-card .sub { font-size: 11px; color: var(--muted); margin-top: 6px; }
+    /* Footer */
+    .footer { text-align:center; color:var(--muted); font-size:11px; padding:32px 16px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>📊 Comptabilité 2026</h1>
+    <div class="sub">Félix Nault-Laberge</div>
+    <div class="update">
+      <span class="dot"></span>
+      Mis à jour le 08/03/2026 à 14:45
+    </div>
+  </div>
+
+  <div class="content">
+
+    <p class="section-title">Vue d'ensemble</p>
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="label">Revenus bruts (à ce jour)</div>
+        <div class="value sm">38 623.00 $</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Dépenses déductibles</div>
+        <div class="value sm" style="color:var(--orange)">7 362.38 $</div>
+      </div>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="label">Profit brut</div>
+        <div class="value sm" style="color:#34d399">31 260.62 $</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Taxes à remettre</div>
+        <div class="value sm" style="color:var(--yellow)">4 683.16 $</div>
+      </div>
+    </div>
+
+    <p class="section-title">Solde fiscal estimé</p>
+    <div class="solde-card">
+      <div class="label">Impôt dû en avril 2027</div>
+      <div class="amount" style="color:#94a3b8">—</div>
+      <div class="sub">Impôt total estimé : — &nbsp;·&nbsp; Retenues source : 1 009.06 $</div>
+    </div>
+
+    <p class="section-title">Revenus &amp; dépenses par mois</p>
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>Mois</th>
+            <th>Freelance</th>
+            <th style="color:#a5b4fc">Salaire</th>
+            <th style="color:var(--orange)">Dépenses</th>
+            <th>Profit</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        <tr>
+          <td class="mois-cell">JAN</td>
+          <td class="num">8 416.10 $</td>
+          <td class="num sal">2 625.00 $</td>
+          <td class="num dep">4 574.25 $</td>
+          <td class="num" style="color:#34d399;font-weight:600">6 466.85 $</td>
+        </tr>
+        <tr>
+          <td class="mois-cell">FÉV</td>
+          <td class="num">3 469.40 $</td>
+          <td class="num sal">2 625.00 $</td>
+          <td class="num dep">2 022.78 $</td>
+          <td class="num" style="color:#34d399;font-weight:600">4 071.62 $</td>
+        </tr>
+        <tr>
+          <td class="mois-cell">MAR</td>
+          <td class="num">19 387.50 $</td>
+          <td class="num sal">2 100.00 $</td>
+          <td class="num dep">765.35 $</td>
+          <td class="num" style="color:#34d399;font-weight:600">20 722.15 $</td>
+        </tr>
+          <tr class="total-row">
+            <td>TOTAL</td>
+            <td class="num">38 623.00 $</td>
+            <td class="num sal">—</td>
+            <td class="num dep">7 362.38 $</td>
+            <td class="num" style="color:#34d399;font-weight:700">31 260.62 $</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="section-title">Déclarations de taxes (TPS/TVQ)</p>
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>Mois</th>
+            <th>C.A.</th>
+            <th>TPS col.</th>
+            <th>TVQ col.</th>
+            <th>Total dû</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        <tr>
+          <td class="mois-cell">JAN</td>
+          <td class="num">11 041.10 $</td>
+          <td class="num">420.81 $</td>
+          <td class="num">839.51 $</td>
+          <td class="num" style="color:#f87171;font-weight:600">1 260.32 $</td>
+        </tr>
+        <tr>
+          <td class="mois-cell">FÉV</td>
+          <td class="num">6 094.40 $</td>
+          <td class="num">173.47 $</td>
+          <td class="num">346.08 $</td>
+          <td class="num" style="color:#f87171;font-weight:600">519.55 $</td>
+        </tr>
+        <tr>
+          <td class="mois-cell">MAR</td>
+          <td class="num">21 487.50 $</td>
+          <td class="num">969.38 $</td>
+          <td class="num">1 933.91 $</td>
+          <td class="num" style="color:#f87171;font-weight:600">2 903.29 $</td>
+        </tr>
+          <tr class="total-row">
+            <td>TOTAL</td>
+            <td class="num">—</td>
+            <td class="num">1 563.66 $</td>
+            <td class="num">3 119.50 $</td>
+            <td class="num" style="color:var(--yellow);font-weight:700">4 683.16 $</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="section-title">Dépenses par catégorie (cumulatif)</p>
+    <div class="card">
+      <table>
+        <thead>
+          <tr><th>Catégorie</th><th>Total</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Sous-traitance</td><td class="num">3 240.00 $</td></tr><tr><td>Bureau</td><td class="num">1 880.40 $</td></tr><tr><td>Déplacements</td><td class="num">1 352.53 $</td></tr><tr><td>Loyer bureau</td><td class="num">674.99 $</td></tr><tr><td>Repas représentation</td><td class="num">170.66 $</td></tr><tr><td>Banque</td><td class="num">43.80 $</td></tr>
+          <tr class="total-row">
+            <td>TOTAL</td>
+            <td class="num" style="color:var(--orange);font-weight:700">7 362.38 $</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="footer">Généré automatiquement · Données privées</div>
+</body>
+</html>
