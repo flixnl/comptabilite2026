@@ -1,10 +1,12 @@
 {
-  "updated": "2026-03-08 15:26",
+  "updated": "2026-03-08 15:44",
   "revenus": 38623.0,
   "depenses": 7362.38,
   "profit": 31260.62,
-  "taxes_a_remettre": 4683.16,
-  "solde_fiscal": 0,
+  "taxes_mois_courant": 2265.71,
+  "solde_fiscal": 2004.61,
+  "total_impot": 3013.67,
+  "impots_retenus": 1009.06,
   "mois": [
     {
       "mois": "JAN",
