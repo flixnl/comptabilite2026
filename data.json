@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-11 13:01",
+  "updated": "2026-03-11 13:35",
   "revenus": 22635.5,
   "a_recevoir": 16325.0,
   "depenses": 10543.57,
@@ -18,21 +18,24 @@
       "freelance": 8416.1,
       "salaire": 2625.0,
       "depenses": 6454.82,
-      "profit": 4586.28
+      "profit": 4586.28,
+      "a_recevoir": 0
     },
     {
       "mois": "FÉV",
       "freelance": 3469.4,
       "salaire": 2625.0,
       "depenses": 2803.51,
-      "profit": 3290.89
+      "profit": 3290.89,
+      "a_recevoir": 0
     },
     {
       "mois": "MAR",
       "freelance": 3400.0,
       "salaire": 2100.0,
       "depenses": 1285.24,
-      "profit": 4214.76
+      "profit": 4214.76,
+      "a_recevoir": 16325.0
     }
   ]
 }
