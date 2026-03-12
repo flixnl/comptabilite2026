@@ -1,16 +1,16 @@
 {
-  "updated": "2026-03-11 22:30",
+  "updated": "2026-03-11 22:54",
   "revenus": 30213.43,
   "a_recevoir": 24095.22,
-  "depenses": 10645.23,
-  "profit": 19568.2,
-  "taxes_mois_courant": 2703.74,
-  "solde_fiscal": 10358.64,
-  "total_charges": 11386.99,
-  "total_impot": 6124.24,
-  "rrq": 4075.93,
-  "rqap": 745.03,
-  "fss": 441.79,
+  "depenses": 10655.59,
+  "profit": 19557.84,
+  "taxes_mois_courant": 2702.18,
+  "solde_fiscal": 10354.42,
+  "total_charges": 11382.77,
+  "total_impot": 6121.69,
+  "rrq": 4074.6,
+  "rqap": 744.82,
+  "fss": 441.66,
   "impots_retenus": 1028.35,
   "mois": [
     {
@@ -33,8 +33,8 @@
       "mois": "MAR",
       "freelance": 3400.0,
       "salaire": 3070.22,
-      "depenses": 1386.9,
-      "profit": 5083.32,
+      "depenses": 1397.26,
+      "profit": 5072.96,
       "a_recevoir": 24095.22
     }
   ]
