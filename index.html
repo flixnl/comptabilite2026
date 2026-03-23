@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <title>Comptabilité 2026</title>
+  <style>
+    :root {
+      --bg:      #0f172a;
+      --card:    #1e293b;
+      --border:  #334155;
+      --text:    #f1f5f9;
+      --muted:   #94a3b8;
+      --accent:  #6366f1;
+      --green:   #34d399;
+      --red:     #f87171;
+      --orange:  #fb923c;
+      --yellow:  #fbbf24;
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      font-family: -apple-system, 'SF Pro Text', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      padding-bottom: env(safe-area-inset-bottom, 24px);
+    }
+    .header {
+      background: linear-gradient(135deg, #1e1b4b 0%, #1e293b 100%);
+      padding: 52px 20px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .header h1 {
+      font-size: 22px; font-weight: 700;
+      letter-spacing: -0.5px; margin-bottom: 4px;
+    }
+    .header .sub { color: var(--muted); font-size: 13px; }
+    .header .update {
+      font-size: 11px; color: var(--muted); margin-top: 8px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .dot { width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block; }
+    .content { padding: 16px; max-width: 600px; margin: 0 auto; }
+    .section-title {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--muted); margin: 24px 0 10px;
+    }
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .kpi-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;
+    }
+    .kpi-row.three { grid-template-columns: 1fr 1fr 1fr; }
+    .kpi {
+      background: var(--card); border-radius: 14px;
+      border: 1px solid var(--border); padding: 16px 14px;
+    }
+    .kpi .label { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+    .kpi .value { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+    .kpi .value.sm { font-size: 16px; }
+    table { width: 100%; border-collapse: collapse; }
+    th {
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.5px; color: var(--muted);
+      padding: 10px 12px 8px; text-align: right;
+      border-bottom: 1px solid var(--border);
+    }
+    th:first-child { text-align: left; }
+    td { padding: 10px 12px; border-bottom: 1px solid #1e293b; font-size: 13px; }
+    td:first-child { color: var(--text); font-weight: 500; }
+    .num { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
+    .sal { color: #a5b4fc; }
+    .dep { color: var(--orange); }
+    .cat-cell { font-size: 12px; }
+    .mois-cell {
+      font-size: 12px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    tr:last-child td { border-bottom: none; }
+    .total-row td {
+      font-weight: 700;
+      border-top: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+    }
+    .empty-row td { opacity: 0.35; }
+    .solde-card {
+      background: linear-gradient(135deg, #1e1b4b 0%, #1e293b 100%);
+      border-radius: 16px; border: 1px solid #3730a3;
+      padding: 20px; margin-bottom: 12px; text-align: center;
+    }
+    .solde-card .label { font-size: 12px; color: #a5b4fc; margin-bottom: 8px; }
+    .solde-card .amount { font-size: 36px; font-weight: 800; letter-spacing: -1px; }
+    .solde-card .sub { font-size: 11px; color: var(--muted); margin-top: 6px; }
+    .footer { text-align:center; color:var(--muted); font-size:11px; padding:32px 16px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>📊 Comptabilité 2026</h1>
+    <div class="sub">Félix Nault-Laberge</div>
+    <div class="update">
+      <span class="dot"></span>
+      Mis à jour le 22/03/2026 à 22:05
+    </div>
+  </div>
+
+  <div class="content">
+
+    
+  <p class="section-title">Alertes de pilotage 🔴</p>
+  <div class="card">
+    <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-bottom:1px solid #1e293b"><span style="font-size:16px;line-height:1.4">🔴</span><div><div style="font-size:13px;color:var(--text);line-height:1.4">Acompte provisionnel EN RETARD : Acompte 1 (mars 2026) était dû le 2026-03-15</div><div style="font-size:10px;color:#f87171;font-weight:600;text-transform:uppercase;margin-top:3px">HIGH</div></div></div><div style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-bottom:1px solid #1e293b"><span style="font-size:16px;line-height:1.4">🔴</span><div><div style="font-size:13px;color:var(--text);line-height:1.4">Impôts + cotisations estimés : 12,675.16 $ (hors TPS/TVQ)</div><div style="font-size:10px;color:#f87171;font-weight:600;text-transform:uppercase;margin-top:3px">HIGH</div></div></div><div style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-bottom:1px solid #1e293b"><span style="font-size:16px;line-height:1.4">🟡</span><div><div style="font-size:13px;color:var(--text);line-height:1.4">Prochaine remise (mars) : 2,199.19 $ — Taxes à remettre (mars) : 2,199.19 $ (TPS + TVQ)</div><div style="font-size:10px;color:#fbbf24;font-weight:600;text-transform:uppercase;margin-top:3px">MEDIUM</div></div></div><div style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-bottom:1px solid #1e293b"><span style="font-size:16px;line-height:1.4">🟡</span><div><div style="font-size:13px;color:var(--text);line-height:1.4">Marge de trésorerie faible : 0.00 $</div><div style="font-size:10px;color:#fbbf24;font-weight:600;text-transform:uppercase;margin-top:3px">MEDIUM</div></div></div><div style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-bottom:1px solid #1e293b"><span style="font-size:16px;line-height:1.4">🔵</span><div><div style="font-size:13px;color:var(--text);line-height:1.4">Facture 2026-004 — 6,800.00 $ non encaissée (KOStudios)</div><div style="font-size:10px;color:#60a5fa;font-weight:600;text-transform:uppercase;margin-top:3px">LOW</div></div></div>
+  </div>
+
+    <p class="section-title">Vue d'ensemble</p>
+    <div class="kpi-row" style="grid-template-columns:repeat(4,1fr)">
+      <div class="kpi">
+        <div class="label">Revenus encaissés</div>
+        <div class="value sm">41 470.04 $</div>
+      </div>
+      <div class="kpi">
+        <div class="label">À recevoir</div>
+        <div class="value sm" style="color:var(--red)">6 800.00 $</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Revenu total</div>
+        <div class="value sm" style="color:#60a5fa">48 270.04 $</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Dépenses déductibles</div>
+        <div class="value sm" style="color:var(--orange)">11 588.36 $</div>
+      </div>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="label">Profit brut (encaissé)</div>
+        <div class="value sm" style="color:#34d399">29 881.68 $</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Taxes à remettre — mars</div>
+        <div class="value sm" style="color:var(--yellow)">2 199.19 $</div>
+      </div>
+    </div>
+
+    <p class="section-title">Solde fiscal estimé</p>
+    <div class="solde-card">
+      <div class="label">Charges fiscales estimées en 2027 (impôt + cotisations autonomes)</div>
+      <div class="amount" style="color:#f87171">12 675.16 $</div>
+      <div class="sub" style="margin-top:10px;line-height:1.8">
+        Impôt fédéral + provincial : 7 271.49 $<br>
+        Cotisations autonomes (RRQ + RQAP + FSS) : 5 403.67 $<br>
+        <span style="border-top:1px solid #4b5563;display:inline-block;padding-top:4px;margin-top:2px">
+          Total charges estimées : 12 675.16 $
+        </span>
+      </div>
+      <div class="sub" style="margin-top:6px;font-style:italic;color:#6b7280">
+        Basé sur les revenus réels à ce jour — aucune projection annuelle
+      </div>
+    </div>
+
+    <p class="section-title">Revenus par mois</p>
+    <div class="card" style="padding:16px 12px 8px">
+      <svg viewBox="0 0 800 280" style="width:100%;height:auto;display:block;margin:8px 0">
+      
+    <g transform="translate(60, 14)">
+      <rect x="0" y="-9" width="12" height="12" rx="3" fill="#6366f1"/>
+      <text x="16" y="1" fill="#cbd5e1" font-size="12" font-family="-apple-system,system-ui,sans-serif">Freelance</text>
+      <rect x="100" y="-9" width="12" height="12" rx="3" fill="#22d3ee"/>
+      <text x="116" y="1" fill="#cbd5e1" font-size="12" font-family="-apple-system,system-ui,sans-serif">Salaire</text>
+      <rect x="190" y="-9" width="12" height="12" rx="3" fill="#a78bfa" opacity="0.4"/>
+      <rect x="190" y="-9" width="12" height="12" rx="3" fill="none" stroke="#a78bfa" stroke-width="1" stroke-dasharray="3,2" opacity="0.85"/>
+      <text x="206" y="1" fill="#cbd5e1" font-size="12" font-family="-apple-system,system-ui,sans-serif">À recevoir</text>
+    </g><line x1="60" y1="244" x2="780" y2="244" stroke="#334155" stroke-width="0.5"/><text x="52" y="248" text-anchor="end" fill="#64748b" font-size="10" font-family="-apple-system,system-ui,sans-serif">0$</text><line x1="60" y1="192" x2="780" y2="192" stroke="#334155" stroke-width="0.5"/><text x="52" y="196" text-anchor="end" fill="#64748b" font-size="10" font-family="-apple-system,system-ui,sans-serif">7,749$</text><line x1="60" y1="140" x2="780" y2="140" stroke="#334155" stroke-width="0.5"/><text x="52" y="144" text-anchor="end" fill="#64748b" font-size="10" font-family="-apple-system,system-ui,sans-serif">15,497$</text><line x1="60" y1="88" x2="780" y2="88" stroke="#334155" stroke-width="0.5"/><text x="52" y="92" text-anchor="end" fill="#64748b" font-size="10" font-family="-apple-system,system-ui,sans-serif">23,246$</text><line x1="60" y1="36" x2="780" y2="36" stroke="#334155" stroke-width="0.5"/><text x="52" y="40" text-anchor="end" fill="#64748b" font-size="10" font-family="-apple-system,system-ui,sans-serif">30,994$</text><rect x="69.0" y="226.4" width="33.0" height="17.6" rx="0" fill="#22d3ee" opacity="0.9"/><rect x="69.0" y="170.8" width="33.0" height="55.5" rx="3" fill="#6366f1" opacity="0.9"/><text x="90.0" y="272" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600" font-family="-apple-system,system-ui,sans-serif">JAN</text><rect x="129.0" y="221.7" width="33.0" height="22.3" rx="0" fill="#22d3ee" opacity="0.9"/><rect x="129.0" y="198.9" width="33.0" height="22.8" rx="3" fill="#6366f1" opacity="0.9"/><text x="150.0" y="272" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600" font-family="-apple-system,system-ui,sans-serif">FÉV</text><rect x="189.0" y="223.4" width="33.0" height="20.6" rx="0" fill="#22d3ee" opacity="0.9"/><rect x="189.0" y="84.0" width="33.0" height="139.4" rx="0" fill="#6366f1" opacity="0.9"/><rect x="189.0" y="36.0" width="33.0" height="48.0" rx="3" fill="#a78bfa" opacity="0.30"/><rect x="189.0" y="36.0" width="33.0" height="48.0" rx="3" fill="none" stroke="#a78bfa" stroke-width="1.2" stroke-dasharray="3,2" opacity="0.80"/><text x="210.0" y="272" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600" font-family="-apple-system,system-ui,sans-serif">MAR</text><text x="270.0" y="272" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600" font-family="-apple-system,system-ui,sans-serif">AVR</text><text x="330.0" y="272" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600" font-family="-apple-system,system-ui,sans-serif">MAI</text><text x="390.0" y="272" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600" font-family="-apple-system,system-ui,sans-serif">JUN</text><text x="450.0" y="272" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600" font-family="-apple-system,system-ui,sans-serif">JUL</text><text x="510.0" y="272" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600" font-family="-apple-system,system-ui,sans-serif">AOÛ</text><text x="570.0" y="272" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600" font-family="-apple-system,system-ui,sans-serif">SEP</text><text x="630.0" y="272" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600" font-family="-apple-system,system-ui,sans-serif">OCT</text><text x="690.0" y="272" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600" font-family="-apple-system,system-ui,sans-serif">NOV</text><text x="750.0" y="272" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="600" font-family="-apple-system,system-ui,sans-serif">DÉC</text>
+    </svg>
+    </div>
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Freelance</th>
+            <th style="color:#a5b4fc">Salaire</th>
+            <th style="color:var(--orange)">Dépenses</th>
+            <th>Profit</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        <tr>
+          <td class="mois-cell">JAN</td>
+          <td class="num">8 276.31 $</td>
+          <td class="num sal">2 625.00 $</td>
+          <td class="num dep">7 161.87 $</td>
+          <td class="num">3 739.44 $</td>
+        </tr>
+        <tr>
+          <td class="mois-cell">FÉV</td>
+          <td class="num">3 399.40 $</td>
+          <td class="num sal">3 325.00 $</td>
+          <td class="num dep">2 897.24 $</td>
+          <td class="num">3 827.16 $</td>
+        </tr>
+        <tr>
+          <td class="mois-cell">MAR</td>
+          <td class="num">20 774.11 $</td>
+          <td class="num sal">3 070.22 $</td>
+          <td class="num dep">1 529.25 $</td>
+          <td class="num">22 315.08 $</td>
+        </tr>
+        <tr class="empty-row">
+          <td class="mois-cell">AVR</td>
+          <td class="num">—</td>
+          <td class="num sal">—</td>
+          <td class="num dep">—</td>
+          <td class="num">—</td>
+        </tr>
+        <tr class="empty-row">
+          <td class="mois-cell">MAI</td>
+          <td class="num">—</td>
+          <td class="num sal">—</td>
+          <td class="num dep">—</td>
+          <td class="num">—</td>
+        </tr>
+        <tr class="empty-row">
+          <td class="mois-cell">JUIN</td>
+          <td class="num">—</td>
+          <td class="num sal">—</td>
+          <td class="num dep">—</td>
+          <td class="num">—</td>
+        </tr>
+        <tr class="empty-row">
+          <td class="mois-cell">JUIL</td>
+          <td class="num">—</td>
+          <td class="num sal">—</td>
+          <td class="num dep">—</td>
+          <td class="num">—</td>
+        </tr>
+        <tr class="empty-row">
+          <td class="mois-cell">AOÛ</td>
+          <td class="num">—</td>
+          <td class="num sal">—</td>
+          <td class="num dep">—</td>
+          <td class="num">—</td>
+        </tr>
+        <tr class="empty-row">
+          <td class="mois-cell">SEP</td>
+          <td class="num">—</td>
+          <td class="num sal">—</td>
+          <td class="num dep">—</td>
+          <td class="num">—</td>
+        </tr>
+        <tr class="empty-row">
+          <td class="mois-cell">OCT</td>
+          <td class="num">—</td>
+          <td class="num sal">—</td>
+          <td class="num dep">—</td>
+          <td class="num">—</td>
+        </tr>
+        <tr class="empty-row">
+          <td class="mois-cell">NOV</td>
+          <td class="num">—</td>
+          <td class="num sal">—</td>
+          <td class="num dep">—</td>
+          <td class="num">—</td>
+        </tr>
+        <tr class="empty-row">
+          <td class="mois-cell">DÉC</td>
+          <td class="num">—</td>
+          <td class="num sal">—</td>
+          <td class="num dep">—</td>
+          <td class="num">—</td>
+        </tr>
+          <tr class="total-row">
+            <td>TOTAL</td>
+            <td class="num">32 449.82 $</td>
+            <td class="num sal">9 020.22 $</td>
+            <td class="num dep">11 588.36 $</td>
+            <td class="num" style="color:#34d399;font-weight:700">29 881.68 $</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="section-title">Dépenses par catégorie (cumulatif)</p>
+    <div class="card">
+      <table>
+        <thead>
+          <tr><th>Catégorie</th><th>Total</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="cat-cell">Frais de bureau</td><td class="num">3 577.04 $</td></tr><tr><td class="cat-cell">Sous-traitance</td><td class="num">3 540.00 $</td></tr><tr><td class="cat-cell">Amortissement</td><td class="num">1 853.79 $</td></tr><tr><td class="cat-cell">Frais de déplacement / transport</td><td class="num">1 255.99 $</td></tr><tr><td class="cat-cell">Loyer</td><td class="num">899.99 $</td></tr><tr><td class="cat-cell">Fournitures</td><td class="num">201.27 $</td></tr><tr><td class="cat-cell">Repas et frais de représentation</td><td class="num">155.42 $</td></tr><tr><td class="cat-cell">Téléphone / Internet</td><td class="num">61.06 $</td></tr><tr><td class="cat-cell">Intérêts et frais bancaires</td><td class="num">43.80 $</td></tr>
+          <tr class="total-row">
+            <td>TOTAL</td>
+            <td class="num" style="color:var(--orange);font-weight:700">11 588.36 $</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    
+  <p class="section-title">Obligations financières</p>
+
+        <div class="card" style="padding:16px;margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+            <div style="font-size:14px;font-weight:700;color:var(--text)">BIA / Nantel<span style="font-size:9px;padding:2px 6px;border-radius:10px;background:#1e293b;color:#a3e635;border:1px solid #a3e63540;margin-left:6px">réel</span></div>
+            <span style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;
+                         padding:3px 8px;border-radius:20px;background:#1e293b;
+                         color:#a78bfa;border:1px solid #4c1d95">actif</span>
+          </div>
+          
+          <div style="margin:8px 0 4px">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:4px">
+              <span>12 600.00 $ payé / 36 000.00 $ total</span>
+              <span style="color:#f87171;font-weight:700">35.0 %</span>
+            </div>
+            <div style="height:6px;background:#1e293b;border-radius:3px;overflow:hidden">
+              <div style="height:100%;width:35.0%;background:#f87171;border-radius:3px;transition:width 0.4s"></div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+            <div style="background:#0f172a;border-radius:10px;padding:10px">
+              <div style="font-size:10px;color:var(--muted);margin-bottom:3px">Montant payé</div>
+              <div style="font-size:16px;font-weight:700;color:#34d399">12 600.00 $</div>
+            </div>
+            <div style="background:#0f172a;border-radius:10px;padding:10px">
+              <div style="font-size:10px;color:var(--muted);margin-bottom:3px">Solde total cible</div>
+              <div style="font-size:16px;font-weight:700;color:var(--text)">36 000.00 $</div>
+            </div>
+            <div style="background:#0f172a;border-radius:10px;padding:10px;grid-column:span 2">
+              <div style="font-size:10px;color:var(--muted);margin-bottom:3px">Date limite</div>
+              <div style="font-size:13px;font-weight:600;color:#60a5fa">2029-07-01</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="padding:16px;margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+            <div style="font-size:14px;font-weight:700;color:var(--text)">Revenu Québec<span style="font-size:9px;padding:2px 6px;border-radius:10px;background:#1e293b;color:#fb923c;border:1px solid #fb923c40;margin-left:6px">estimé</span></div>
+            <span style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;
+                         padding:3px 8px;border-radius:20px;background:#1e293b;
+                         color:#a78bfa;border:1px solid #4c1d95">actif</span>
+          </div>
+          
+          <div style="margin:8px 0 4px">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:4px">
+              <span>5 158.19 $ payé / 30 931.23 $ total</span>
+              <span style="color:#f87171;font-weight:700">16.7 %</span>
+            </div>
+            <div style="height:6px;background:#1e293b;border-radius:3px;overflow:hidden">
+              <div style="height:100%;width:16.7%;background:#f87171;border-radius:3px;transition:width 0.4s"></div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+            <div style="background:#0f172a;border-radius:10px;padding:10px">
+              <div style="font-size:10px;color:var(--muted);margin-bottom:3px">Montant payé</div>
+              <div style="font-size:16px;font-weight:700;color:#34d399">5 158.19 $</div>
+            </div>
+            <div style="background:#0f172a;border-radius:10px;padding:10px">
+              <div style="font-size:10px;color:var(--muted);margin-bottom:3px">Solde total cible</div>
+              <div style="font-size:16px;font-weight:700;color:var(--text)">30 931.23 $</div>
+            </div>
+            <div style="background:#0f172a;border-radius:10px;padding:10px;grid-column:span 2">
+              <div style="font-size:10px;color:var(--muted);margin-bottom:3px">Date limite</div>
+              <div style="font-size:13px;font-weight:600;color:#60a5fa">2026-04-30</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="padding:16px;margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+            <div style="font-size:14px;font-weight:700;color:var(--text)">Agence du revenu du Canada (ARC)<span style="font-size:9px;padding:2px 6px;border-radius:10px;background:#1e293b;color:#fb923c;border:1px solid #fb923c40;margin-left:6px">estimé</span></div>
+            <span style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;
+                         padding:3px 8px;border-radius:20px;background:#1e293b;
+                         color:#a78bfa;border:1px solid #4c1d95">actif</span>
+          </div>
+          
+          <div style="margin:8px 0 4px">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:4px">
+              <span>12 422.47 $ payé / 12 710.43 $ total</span>
+              <span style="color:#60a5fa;font-weight:700">97.7 %</span>
+            </div>
+            <div style="height:6px;background:#1e293b;border-radius:3px;overflow:hidden">
+              <div style="height:100%;width:97.7%;background:#60a5fa;border-radius:3px;transition:width 0.4s"></div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+            <div style="background:#0f172a;border-radius:10px;padding:10px">
+              <div style="font-size:10px;color:var(--muted);margin-bottom:3px">Montant payé</div>
+              <div style="font-size:16px;font-weight:700;color:#34d399">12 422.47 $</div>
+            </div>
+            <div style="background:#0f172a;border-radius:10px;padding:10px">
+              <div style="font-size:10px;color:var(--muted);margin-bottom:3px">Solde total cible</div>
+              <div style="font-size:16px;font-weight:700;color:var(--text)">12 710.43 $</div>
+            </div>
+            <div style="background:#0f172a;border-radius:10px;padding:10px;grid-column:span 2">
+              <div style="font-size:10px;color:var(--muted);margin-bottom:3px">Date limite</div>
+              <div style="font-size:13px;font-weight:600;color:#60a5fa">2026-04-30</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="padding:16px;margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+            <div style="font-size:14px;font-weight:700;color:var(--text)">Revenu Québec<span style="font-size:9px;padding:2px 6px;border-radius:10px;background:#1e293b;color:#fb923c;border:1px solid #fb923c40;margin-left:6px">estimé</span></div>
+            <span style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;
+                         padding:3px 8px;border-radius:20px;background:#1e293b;
+                         color:#a78bfa;border:1px solid #4c1d95">actif</span>
+          </div>
+          
+          <div style="margin:8px 0 4px">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:4px">
+              <span>— payé / 5 457.01 $ total</span>
+              <span style="color:#f87171;font-weight:700">0.0 %</span>
+            </div>
+            <div style="height:6px;background:#1e293b;border-radius:3px;overflow:hidden">
+              <div style="height:100%;width:0.0%;background:#f87171;border-radius:3px;transition:width 0.4s"></div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+            <div style="background:#0f172a;border-radius:10px;padding:10px">
+              <div style="font-size:10px;color:var(--muted);margin-bottom:3px">Montant payé</div>
+              <div style="font-size:16px;font-weight:700;color:#34d399">—</div>
+            </div>
+            <div style="background:#0f172a;border-radius:10px;padding:10px">
+              <div style="font-size:10px;color:var(--muted);margin-bottom:3px">Solde total cible</div>
+              <div style="font-size:16px;font-weight:700;color:var(--text)">5 457.01 $</div>
+            </div>
+            <div style="background:#0f172a;border-radius:10px;padding:10px;grid-column:span 2">
+              <div style="font-size:10px;color:var(--muted);margin-bottom:3px">Date limite</div>
+              <div style="font-size:13px;font-weight:600;color:#60a5fa">2027-04-30</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="padding:16px;margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+            <div style="font-size:14px;font-weight:700;color:var(--text)">Agence du revenu du Canada (ARC)<span style="font-size:9px;padding:2px 6px;border-radius:10px;background:#1e293b;color:#fb923c;border:1px solid #fb923c40;margin-left:6px">estimé</span></div>
+            <span style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;
+                         padding:3px 8px;border-radius:20px;background:#1e293b;
+                         color:#a78bfa;border:1px solid #4c1d95">actif</span>
+          </div>
+          
+          <div style="margin:8px 0 4px">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:4px">
+              <span>— payé / 2 171.01 $ total</span>
+              <span style="color:#f87171;font-weight:700">0.0 %</span>
+            </div>
+            <div style="height:6px;background:#1e293b;border-radius:3px;overflow:hidden">
+              <div style="height:100%;width:0.0%;background:#f87171;border-radius:3px;transition:width 0.4s"></div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+            <div style="background:#0f172a;border-radius:10px;padding:10px">
+              <div style="font-size:10px;color:var(--muted);margin-bottom:3px">Montant payé</div>
+              <div style="font-size:16px;font-weight:700;color:#34d399">—</div>
+            </div>
+            <div style="background:#0f172a;border-radius:10px;padding:10px">
+              <div style="font-size:10px;color:var(--muted);margin-bottom:3px">Solde total cible</div>
+              <div style="font-size:16px;font-weight:700;color:var(--text)">2 171.01 $</div>
+            </div>
+            <div style="background:#0f172a;border-radius:10px;padding:10px;grid-column:span 2">
+              <div style="font-size:10px;color:var(--muted);margin-bottom:3px">Date limite</div>
+              <div style="font-size:13px;font-weight:600;color:#60a5fa">2027-04-30</div>
+            </div>
+          </div>
+        </div>
+
+    
+  <div style="margin-top:32px;border-top:2px solid #374151;padding-top:24px">
+    <p class="section-title" style="color:#94a3b8">Annexe — Bilan fiscal 2025 (année complète)</p>
+    <div class="kpi-row" style="grid-template-columns:repeat(3,1fr);margin-bottom:16px">
+      <div class="kpi">
+        <div class="label">Revenus bruts 2025</div>
+        <div class="value sm" style="color:#60a5fa">162 301.80 $</div>
+        <div style="font-size:11px;color:#6b7280;margin-top:4px">Freelance 142 850.54 $ · Salaire 19 144.13 $</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Dépenses déductibles 2025</div>
+        <div class="value sm" style="color:var(--orange)">24 968.02 $</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Profit brut 2025</div>
+        <div class="value sm" style="color:#34d399">137 333.78 $</div>
+      </div>
+    </div>
+    <div class="card" style="background:#1e2433">
+      <table>
+        <thead>
+          <tr>
+            <th>Total charges 2025 (impôt + RRQ + FSS)</th>
+            <th>Déjà retenu à la source</th>
+            <th>Solde dû en avril 2026</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num" style="font-weight:600">43 641.66 $</td>
+            <td class="num" style="color:#34d399">8 580.66 $</td>
+            <td class="num" style="color:#f87171;font-weight:700;font-size:16px">35 061.00 $</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:11px;color:#4b5563;margin-top:10px;font-style:italic">
+      Source : cache fiscal 2025 (DÉPENSES 2025.xlsm)
+    </p>
+  </div>
+
+  </div>
+
+  <div class="footer">Généré automatiquement · Données privées · Source : CockpitContext</div>
+</body>
+</html>

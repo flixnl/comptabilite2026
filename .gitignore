@@ -1,0 +1,14 @@
+# Caches Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Logs auto-push (trop volumineux, pas utile dans l'historique)
+auto_push.log
+
+# Fichiers temporaires
+*.tmp
+*.bak
+*.lock
+
+auto_push.log
